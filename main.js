@@ -1,6 +1,6 @@
 console.log('Hello')
 
-/*----- constants -----*/
+/*---------------------- constants ----------------*/
 const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -13,27 +13,30 @@ const winningCombos = [
     ];
 
 
-/*----- app's state (variables) -----*/
+/*----------------- app's state (variables) ---------------*/
 let board;
 
 let turn = 'X';
 
 let win;
 
+let scoreboard = {x : 0, o :0};
 
+const click = new Audio("sounds/click.wav"); //sounds everytime we click 
 
-/*----- cached element references -----*/
+/*--------------- cached element references --------------*/
 const squares = Array.from(document.querySelectorAll('#board div')); 
     //queryselectorall () allows us to find the element with the id of .board and selecting all the div children of that element(grabs a secion of a div)
 
 const messages = document.querySelector('h2'); //selects the whole h2 section from document 
 
 
-/*----- event listeners -----*/
+/*-------------------- event listeners ----------------------*/
 document.getElementById('board').addEventListener('click', handleTurn);
 
 document.getElementById('reset-button').addEventListener('click', init);
-/*----- functions -----*/
+
+/*----- -----------------functions -------------------*/
 function init() { //init function to check if squares are present 
     board = [
     '', '', '',
@@ -95,3 +98,10 @@ getWinner = () => { //new way to write a function called arrow function
     //     return 'HelloWOrld';
         
     //     }
+
+updateScoreboard = (winner) => { //cant get the scoreboard
+    if (++scoreboard[winner]==3) {
+        alert("Game over! " + winner + " has won three matches"); 	
+    } 
+}
+
